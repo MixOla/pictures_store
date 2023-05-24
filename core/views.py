@@ -1,85 +1,59 @@
-from django.contrib.auth import (
-    get_user_model,
-    login,
-    logout
-)
-from drf_spectacular.utils import extend_schema_view, extend_schema
-from rest_framework import (
-    permissions,
-    status
-)
-from rest_framework.generics import (
-    CreateAPIView,
-    GenericAPIView,
-    RetrieveUpdateDestroyAPIView,
-    UpdateAPIView
-)
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
-
-from core.serializers import (
-    LoginSerializer,
-    ProfileSerializer,
-    RegistrationSerializer,
-    UpdatePasswordSerializer
-)
+from django.http import HttpResponse
+from django.shortcuts import render
+from django.contrib.auth import authenticate, login
+from .forms import LoginForm, UserRegistrationForm
+from .models import User
 
 
-USER_MODEL = get_user_model()
+def user_login(request):
+    "Аутентификация пользователя"
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            user = authenticate(request,
+                                username=cd['username'],
+                                password=cd['password'])
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return HttpResponse('Аутентификация прошла успешно')
+                else:
+                    return HttpResponse('Отключенная учетная запись')
+            else:
+                return HttpResponse('Недопустимый логин')
+    else:
+        form = LoginForm()
+    return render(request, 'galery/login.html', {'form': form})
 
 
-class RegistrationView(CreateAPIView):
-    """ User registration. """
-    model = USER_MODEL
-    serializer_class = RegistrationSerializer
+# @login_required
+# def dashboard(request):
+#     return render(request,
+#                   'account/dashboard.html',
+#                   {'section': 'dashboard'})
 
 
-class LoginView(GenericAPIView):
-    """ User login. """
-    serializer_class = LoginSerializer
+def register(request):
+    "Регистрация пользователя"
+    if request.method == 'POST':
+        user_form = UserRegistrationForm(request.POST)
+        if user_form.is_valid():
+            # Create a new user object but avoid saving it yet
+            new_user = user_form.save(commit=False)
+            # Set the chosen password
+            new_user.set_password(
+                user_form.cleaned_data['password'])
+            # Save the User object
+            new_user.save()
+            # Create the user profile
+            User.objects.create(user=new_user)
+            return render(request,
+                          'galery/register_done.html',
+                          {'new_user': new_user})
+    else:
+        user_form = UserRegistrationForm()
+    return render(request,
+                  'galery/register.html',
+                  {'user_form': user_form})
 
-    @extend_schema(
-        description="User login",
-        summary="User login"
-    )
-    def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.save()
-        login(request=request, user=user)
-        return Response(serializer.data)
-
-
-class ProfileView(RetrieveUpdateDestroyAPIView):
-    """ User's profile. """
-    serializer_class = ProfileSerializer
-    queryset = USER_MODEL.objects.all()
-    permission_classes = [IsAuthenticated]
-
-    @extend_schema(
-        description="Retrieve user info",
-        summary="User info"
-    )
-    def get_object(self):
-        return self.request.user
-
-    @extend_schema(
-        description="Destroy user",
-        summary="Destroy user"
-    )
-    def delete(self, request, *args, **kwargs):
-        logout(request)
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
-
-class UpdatePasswordView(UpdateAPIView):
-    """ Password updating. """
-    permission_classes = [IsAuthenticated]
-    serializer_class = UpdatePasswordSerializer
-
-    @extend_schema(
-        description="Update user",
-        summary="Update"
-    )
-    def get_object(self):
-        return self.request.user

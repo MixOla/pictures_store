@@ -9,6 +9,6 @@ class GalerySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Galery
-        fields = ['picture', 'description']
+        fields = ['id', 'img', 'prompt']
         # read_only_fields = '__all__'
-
+#

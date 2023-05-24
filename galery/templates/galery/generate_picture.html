@@ -1,0 +1,13 @@
+{% extends 'galery/base.html' %}
+
+ <title>{%  block title %} Создать изображение {% endblock %}</title>
+
+{% block content %}
+
+  <p>Напиши запрос для изображения:</p>
+  <form method="post">
+    {{ form.as_p }}
+
+    <p><input type="submit" value="Создать изображение"></p>
+  </form>
+{% endblock %}

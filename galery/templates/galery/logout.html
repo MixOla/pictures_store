@@ -1,0 +1,11 @@
+{% extends "galery/base.html" %}
+
+{% block title %}Выйти{% endblock %}
+
+{% block content %}
+  <h1>Logged out</h1>
+  <p>
+    You have been successfully logged out.
+    Вы можете <a href="{% url "login" %}">войти</a>.
+  </p>
+{% endblock %}

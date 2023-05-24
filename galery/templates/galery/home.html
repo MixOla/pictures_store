@@ -1,0 +1,15 @@
+{% extends 'galery/base.html' %}
+
+ <title>{%  block title %} All pictures {% endblock %}</title>
+
+{% block content %}
+    <h2>Список картин</h2>
+    <ul>
+        {%  for p in pictures %}
+            <li>
+                <img src="/media/{{ p.img }}" width="100" /> <p>{{ p.prompt }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
