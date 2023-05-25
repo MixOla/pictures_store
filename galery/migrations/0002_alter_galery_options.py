@@ -4,14 +4,17 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('galery', '0001_initial'),
+        ("galery", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='galery',
-            options={'ordering': ['-created'], 'verbose_name': 'Картинка', 'verbose_name_plural': 'Картинки'},
+            name="galery",
+            options={
+                "ordering": ["-created"],
+                "verbose_name": "Картинка",
+                "verbose_name_plural": "Картинки",
+            },
         ),
     ]

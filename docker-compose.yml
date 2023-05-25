@@ -3,3 +3,42 @@ services:
     image: redis:7.0.8-alpine
     ports:
       - 6379:6379
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    volumes:
+     - ./media/:/app/media/
+    restart: on-failure
+    env_file:
+      - .env
+
+  celery:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: celery -A pictures_store worker -l info
+    entrypoint: ""
+    env_file:
+      - .env
+
+
+    volumes:
+      - ./media/:/app/media/
+    restart: on-failure
+
+
+  db:
+    image: postgres:14.6-alpine
+    restart: on-failure
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    env_file:
+      - .env
+
+volumes:
+  pg_data:
+

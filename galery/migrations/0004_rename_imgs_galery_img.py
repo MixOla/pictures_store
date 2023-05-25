@@ -4,15 +4,14 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('galery', '0003_alter_galery_options_rename_picture_galery_imgs_and_more'),
+        ("galery", "0003_alter_galery_options_rename_picture_galery_imgs_and_more"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='galery',
-            old_name='imgs',
-            new_name='img',
+            model_name="galery",
+            old_name="imgs",
+            new_name="img",
         ),
     ]

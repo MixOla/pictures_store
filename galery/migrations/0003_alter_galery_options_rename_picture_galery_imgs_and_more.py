@@ -4,24 +4,23 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('galery', '0002_alter_galery_options'),
+        ("galery", "0002_alter_galery_options"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='galery',
-            options={'verbose_name': 'Картинка', 'verbose_name_plural': 'Картинки'},
+            name="galery",
+            options={"verbose_name": "Картинка", "verbose_name_plural": "Картинки"},
         ),
         migrations.RenameField(
-            model_name='galery',
-            old_name='picture',
-            new_name='imgs',
+            model_name="galery",
+            old_name="picture",
+            new_name="imgs",
         ),
         migrations.RenameField(
-            model_name='galery',
-            old_name='description',
-            new_name='prompt',
+            model_name="galery",
+            old_name="description",
+            new_name="prompt",
         ),
     ]

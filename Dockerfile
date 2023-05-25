@@ -4,15 +4,13 @@ ENV PYTHONBUFFERED 1
 
 WORKDIR /app
 
-RUN pip install "poetry==1.1.13"
+RUN pip install --upgrade pip
 
-COPY poetry.lock pyproject.toml ./
+COPY requirements.txt .
 
-RUN poetry config virtualenvs.create false \
-    && poetry install --no-dev --no-interaction --no-ansi --no-root
+RUN pip install -r requirements.txt
 
 COPY . .
-
 
 EXPOSE 8000
 

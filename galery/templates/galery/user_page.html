@@ -4,11 +4,11 @@
 
 
 {% block content %}
-    <h2>Примеры картин</h2>
+    <h2>Мои изображения</h2>
     <ul>
-        {%  for p in pictures %}
+        {%  for p in images %}
             <li>
-                <img src="/media/{{ p.img }}" width="100" /> <p>{{ p.prompt }}</p>
+                <img src="{{ p.img.url }}" width="100" /> <p>{{ p.prompt }}</p>
             </li>
         {% endfor %}
     </ul>

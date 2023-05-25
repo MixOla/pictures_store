@@ -7,9 +7,8 @@ class User(AbstractUser):
     pass
 
     def get_absolute_url(self):
-        return reverse('galery_detail', kwargs={'img_id': self.pk})
-
+        return reverse("galery_detail", kwargs={"img_id": self.pk})
 
     class Meta:
-        verbose_name = 'Пользователь'
-        verbose_name_plural = 'Пользователи'
+        verbose_name = "Пользователь"
+        verbose_name_plural = "Пользователи"
