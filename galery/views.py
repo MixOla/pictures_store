@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.urls import reverse
 from django.views.generic import ListView
 from django.views.generic.edit import FormView
 from rest_framework import permissions
@@ -8,7 +9,7 @@ from core.models import User
 from galery.forms import NewImageForm
 from galery.models import Galery
 from galery.serializers import GalerySerializer
-from galery.tasks import print_word
+from galery.tasks import generate_image
 
 
 class GaleryListView(ListView):
@@ -36,15 +37,17 @@ class GaleryListView(ListView):
 class GaleryGenerateImage(FormView):
     form_class = NewImageForm
     template_name = 'galery/generate_picture.html'
+
     # model = Galery
     # queryset = Galery.objects.all()
-    # serializer_class = GalerySerializer
     # permission_classes = [permissions.IsAuthenticated]
 
-    def show_form(request):
+    def get_success_url(self):
+        return reverse('galery_list')
+
+    def show_form(self, request):
         return render(request, 'galery/generate_picture.html')
 
     def form_valid(self, form):
-        print(form)
-        task.hjhgj.delay(form.data)
+        generate_image(description=form.cleaned_data['prompt'], user_id=self.request.user.id)
         return super().form_valid(form)

@@ -1,5 +1,6 @@
 {% extends "galery/base.html" %}
 
+
 {% block title %}Войти{% endblock %}
 
 {% block content %}
@@ -8,6 +9,9 @@
   <form method="post">
     {{ form.as_p }}
     {% csrf_token %}
+
     <p><input type="submit" value="Войти"></p>
+
   </form>
 {% endblock %}
+

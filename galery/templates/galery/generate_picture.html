@@ -1,13 +1,15 @@
 {% extends 'galery/base.html' %}
 
- <title>{%  block title %} Создать изображение {% endblock %}</title>
+<title>{% block title %} Создать изображение {% endblock %}</title>
 
 {% block content %}
 
-  <p>Напиши запрос для изображения:</p>
-  <form method="post">
-    {{ form.as_p }}
+    <p>Напиши запрос для изображения:</p>
+    <form method="post">
 
-    <p><input type="submit" value="Создать изображение"></p>
-  </form>
+        {{ form.as_p }}
+        {% csrf_token %}
+
+        <p><input type="submit" value="Создать изображение"></p>
+    </form>
 {% endblock %}

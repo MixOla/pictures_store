@@ -1,12 +1,18 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LoginView
 from django.http import HttpResponse
-from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
+
 from .forms import LoginForm, UserRegistrationForm
 from .models import User
+from .utils import DataMixin
 
 
 def user_login(request):
-    "Аутентификация пользователя"
+    "Авторизация пользователя"
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -17,7 +23,7 @@ def user_login(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return HttpResponse('Аутентификация прошла успешно')
+                    return redirect('galery_list')
                 else:
                     return HttpResponse('Отключенная учетная запись')
             else:
@@ -28,10 +34,10 @@ def user_login(request):
 
 
 # @login_required
-# def dashboard(request):
+# def generate_image(request):
 #     return render(request,
-#                   'account/dashboard.html',
-#                   {'section': 'dashboard'})
+#                   'galery/generate_picture.html',
+# )
 
 
 def register(request):
@@ -56,4 +62,8 @@ def register(request):
     return render(request,
                   'galery/register.html',
                   {'user_form': user_form})
+
+def logout_user(request):
+    logout(request)
+    return redirect('galery_list')
 
