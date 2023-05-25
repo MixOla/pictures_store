@@ -15,6 +15,8 @@ services:
     restart: on-failure
     env_file:
       - .env
+    depends_on:
+      - db
 
   celery:
     build:
@@ -24,13 +26,12 @@ services:
     entrypoint: ""
     env_file:
       - .env
-
-
+    depends_on:
+      - db
+      - redis
     volumes:
       - ./media/:/app/media/
     restart: on-failure
-
-
   db:
     image: postgres:14.6-alpine
     restart: on-failure
