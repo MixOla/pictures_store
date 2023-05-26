@@ -23,6 +23,7 @@ services:
       - 8000:8000
     volumes:
      - ./media/:/app/media/
+     - ./static/:/app/static/
     restart: unless-stopped
     environment:
       DEBUG: 0
@@ -53,7 +54,7 @@ services:
     depends_on:
       - db
     volumes:
-      - pg_data:/var/lib/postgresql/data
+      - ./static/:/app/static/
     env_file:
       - .env
     command: python manage.py collectstatic --no-input && python manage.py migrate
