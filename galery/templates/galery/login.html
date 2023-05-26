@@ -1,17 +1,31 @@
 {% extends "galery/base.html" %}
-
+{% load django_bootstrap5 %}
 
 {% block title %}Войти{% endblock %}
 
 {% block content %}
-  <h1>Вход</h1>
-  <p>Пожалуйста, заполните следующие поля:</p>
-  <form method="post">
-    {{ form.as_p }}
-    {% csrf_token %}
+    <div class="login">
+        <div class="row my-5">
+            <div class="col-md-12">
+                <form method="post" class="form">
+                    <h1>Вход</h1>
+                    <p>Для создания изображения, заполните следующие поля:</p>
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    <button type="submit" class="btn btn-primary">Войти</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
-    <p><input type="submit" value="Войти"></p>
+    {#{% block content %}#}
+    {#  <h1>Вход</h1>#}
+    {#  <p>Для создания изображения, заполните следующие поля:</p>#}
+    {#  <form method="post">#}
+    {#    {{ form.as_p }}#}
+    {#    {% csrf_token %}#}
+    {#    <p><input type="submit" value="Войти"></p>#}
 
-  </form>
+    </form>
 {% endblock %}
 

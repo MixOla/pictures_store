@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "core",
     "galery",
+    "django_bootstrap5",
     "drf_spectacular",
 ]
 
