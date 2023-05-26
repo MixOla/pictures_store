@@ -7,6 +7,8 @@ services:
       - ./media/:/app/media/
       - ./static/:/app/static/
       - ./docker/conf.d/:/etc/nginx/conf.d/:ro
+    depends_on:
+      - web
   redis:
     image: redis:7.0.8-alpine
     ports:
@@ -45,8 +47,7 @@ services:
       context: .
       dockerfile: Dockerfile
     depends_on:
-      db:
-        condition: service_healthy
+      - db
     volumes:
       - pg_data:/var/lib/postgresql/data
     env_file:
