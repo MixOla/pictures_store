@@ -133,7 +133,7 @@ SPECTACULAR_SETTINGS = {
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-LOGIN_REDIRECT_URL = "galery_list"
+LOGIN_URL = "login"
 
 REDIS_URL = os.environ.get("REDIS_URL", "redis://localhost:6379")
 CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL", REDIS_URL)

@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import ListView
@@ -28,7 +30,8 @@ class GaleryListView(ListView):
         return render(request, "galery/home.html", {"pictures": pictures})
 
 
-class GaleryGenerateImage(FormView):
+
+class GaleryGenerateImage(LoginRequiredMixin, FormView):
     form_class = NewImageForm
     template_name = "galery/generate_picture.html"
 

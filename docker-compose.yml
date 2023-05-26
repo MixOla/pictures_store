@@ -1,9 +1,16 @@
 services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - 80:80
+    volumes:
+      - ./media/:/app/media/
+      - ./static/:/app/static/
+      - ./docker/conf.d/:/etc/nginx/conf.d/:ro
   redis:
     image: redis:7.0.8-alpine
     ports:
       - 6379:6379
-
   web:
     build:
       context: .
@@ -17,7 +24,7 @@ services:
       - .env
     depends_on:
       - db
-
+      - migrations
   celery:
     build:
       context: .
@@ -28,10 +35,23 @@ services:
       - .env
     depends_on:
       - db
+      - migrations
       - redis
     volumes:
       - ./media/:/app/media/
     restart: on-failure
+  migrations:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    env_file:
+      - .env
+    command: python manage.py migrate
   db:
     image: postgres:14.6-alpine
     restart: on-failure
