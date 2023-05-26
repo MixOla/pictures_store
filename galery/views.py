@@ -1,4 +1,3 @@
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse
@@ -34,7 +33,6 @@ class GaleryListView(ListView):
 class GaleryGenerateImage(LoginRequiredMixin, FormView):
     form_class = NewImageForm
     template_name = "galery/generate_picture.html"
-
 
     def get_success_url(self):
         return reverse('user_image')

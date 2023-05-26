@@ -1,9 +1,6 @@
 import time
-
 from django.contrib.auth import get_user_model
-
 from pictures_store.celery import app
-
 from .handler import GenerateImageHandler
 from .models import Galery
 
