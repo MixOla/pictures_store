@@ -1,6 +1,7 @@
 services:
   nginx:
     image: nginx:latest
+    restart: unless-stopped
     ports:
       - 80:80
     volumes:
@@ -11,6 +12,7 @@ services:
       - web
   redis:
     image: redis:7.0.8-alpine
+    restart: unless-stopped
     ports:
       - 6379:6379
   web:
@@ -21,7 +23,7 @@ services:
       - 8000:8000
     volumes:
      - ./media/:/app/media/
-    restart: on-failure
+    restart: unless-stopped
     environment:
       DEBUG: 0
     env_file:
@@ -43,7 +45,7 @@ services:
       - redis
     volumes:
       - ./media/:/app/media/
-    restart: on-failure
+    restart: unless-stopped
   migrations:
     build:
       context: .
@@ -57,7 +59,7 @@ services:
     command: python manage.py migrate
   db:
     image: postgres:14.6-alpine
-    restart: on-failure
+    restart: unless-stopped
     volumes:
       - pg_data:/var/lib/postgresql/data
     env_file:
