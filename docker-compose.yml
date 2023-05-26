@@ -22,6 +22,8 @@ services:
     volumes:
      - ./media/:/app/media/
     restart: on-failure
+    environment:
+      DEBUG: 0
     env_file:
       - .env
     depends_on:
