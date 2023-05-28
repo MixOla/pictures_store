@@ -23,7 +23,4 @@ class Galery(models.Model):
     class Meta:
         verbose_name = "Картинка"
         verbose_name_plural = "Картинки"
-        # ordering = ['-created']
 
-    def __str__(self):
-        return self.prompt

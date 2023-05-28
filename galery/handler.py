@@ -1,5 +1,4 @@
 import base64
-import io
 from urllib.parse import urljoin
 
 import requests
@@ -7,22 +6,24 @@ from django.core.files.base import ContentFile
 
 
 class GenerateImageHandler:
+    """ Обработчик сгенерированных изображений"""
+
     class Endpoint:
         INITIATE = "/initiate_processing"
         CHECK_STATUS = "/check_status"
         GET_RESULTS = "/get_results"
 
     def __init__(
-        self,
-        imgs=None,
-        n=1,
-        height=512,
-        width=512,
-        steps=50,
-        scale=7.5,
-        seed=None,
-        desc=False,
-        cpu=False,
+            self,
+            imgs=None,
+            n=1,
+            height=512,
+            width=512,
+            steps=50,
+            scale=7.5,
+            seed=None,
+            desc=False,
+            cpu=False,
     ):
         self.imgs = imgs
         self.n = n
@@ -37,9 +38,9 @@ class GenerateImageHandler:
         self.host = "http://208.51.60.18:2020/"
 
     def initiate_processing(
-        self,
-        prompt,
-        neg_prompt="",
+            self,
+            prompt,
+            neg_prompt="",
     ):
         params = {
             "prompt": prompt,
@@ -64,6 +65,8 @@ class GenerateImageHandler:
             )
 
     def check_status(self, order_id):
+        """Проверка статуса заявки"""
+
         params = {"id": order_id}
         url = urljoin(self.host, self.Endpoint.CHECK_STATUS)
         response = requests.post(url, json=params)
@@ -75,6 +78,8 @@ class GenerateImageHandler:
             )
 
     def get_results(self, order_id):
+        """Получение номера заявки"""
+
         params = {"id": order_id}
         url = urljoin(self.host, self.Endpoint.GET_RESULTS)
         response = requests.post(url, json=params)
@@ -86,5 +91,7 @@ class GenerateImageHandler:
             )
 
     def decode_img(self, raw_img):
+        """Декодирование изображения"""
+
         decoded = base64.b64decode(raw_img)
         return ContentFile(decoded, name="prompt.png")
