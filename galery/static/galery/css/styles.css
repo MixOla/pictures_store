@@ -2,10 +2,19 @@
 body {
 	color: #8f8f8f;
 	/*font: 12px Tahoma, sans-serif;*/
-	background-image: url("../images/fone.png");
-	background-size: cover;
+	/*background-image: url("../images/background_main1.png");*/
+	/*background-size: 100hv;*/
+
+ 	/*background-attachment: fixed;*/
 	border-top: 5px solid #7e7e7e;
 	margin: 0;
+
+}
+#bg{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-attachment: fixed;
 }
 
 #header{
@@ -38,14 +47,6 @@ p {
 	margin: 20px 0;
 }
 
-html, body {
-	font-family: 'Arial';
-	margin: 0;
-	padding: 0;
-	height: 100%;
-	width: 100%;
-	color: #444;
-}
 
 a {
 	color: #0059b2;
