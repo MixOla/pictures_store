@@ -1,18 +1,15 @@
 import os
 from pathlib import Path
 
-from envparse import env
+# from envparse import env
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-if (env_path := BASE_DIR.joinpath(".env")) and env_path.is_file():
-    env.read_envfile(env_path)
+SECRET_KEY = os.getenv("SECRET_KEY")
 
-SECRET_KEY = env.str("SECRET_KEY")
+DEBUG = os.getenv("DEBUG", default=False)
 
-DEBUG = env.bool("DEBUG", default=False)
-
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
 
 
 # Application definition
@@ -68,11 +65,11 @@ WSGI_APPLICATION = "pictures_store.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": env.str("POSTGRES_DB"),
-        "USER": env.str("POSTGRES_USER"),
-        "PASSWORD": env.str("POSTGRES_PASSWORD"),
-        "HOST": env.str("POSTGRES_HOST", default="127.0.0.1"),
-        "PORT": env.int("POSTGRES_PORT"),
+        "NAME": os.getenv("POSTGRES_DB"),
+        "USER": os.getenv("POSTGRES_USER"),
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
+        "HOST": os.getenv("POSTGRES_HOST", default="127.0.0.1"),
+        "PORT": os.getenv("POSTGRES_PORT"),
     }
 }
 
