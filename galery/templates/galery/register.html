@@ -5,10 +5,25 @@
 
 
 {% block content %}
-<h1>Регистрация</h1>
-<form method="post">
-    {% csrf_token %}
-    {{ user_form.as_p }}
-    <p><input type="submit" value="Зарегистрироваться"></p>
-</form>
+    <h1>Регистрация</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        <p><input type="submit" value="Зарегистрироваться"></p>
+    </form>
 {% endblock %}
+
+{#{% block content %}#}
+{#    <div class="register">#}
+{#        <div class="row my-5">#}
+{#            <div class="col-md-3">#}
+{#                <form method="post" class="form">#}
+{#                    <h1>Регистрация</h1>#}
+{#                    {% csrf_token %}#}
+{#                    {% bootstrap_form form %}#}
+{#                    <button type="submit" class="btn btn-primary">Зарегистрироваться</button>#}
+{#                </form>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#{% endblock %}#}

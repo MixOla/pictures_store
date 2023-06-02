@@ -82,7 +82,13 @@ ul.mainmenu li a:hover {
 }
 
 .content-text {
-    max-width: 900px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login {
+    max-width: 400px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -98,43 +104,4 @@ ul.mainmenu li a:hover {
     text-align: center;
 }
 
-/*#bg {*/
-/*    background-size: contain;*/
-/*    background-repeat: no-repeat;*/
-/*    background-position: bottom;*/
-/*    background-attachment: fixed;*/
-/*}*/
-
-/*#header {*/
-/*    box-sizing: border-box;*/
-
-/*    background: #3F4137;*/
-/*    padding: 5px;*/
-/*    color: #aaa;*/
-/*    font-size: 14px;*/
-/*    font-family: Verdana, Geneva, Arial, Helvetica;*/
-/*    text-align: left;*/
-/*    overflow: hidden;*/
-/*}*/
-
-/*input[type="text"] {*/
-/*    background-color: #f3f3f3;*/
-/*    border: 1px solid #e7e7e7;*/
-/*    height: 30px;*/
-/*    color: #b2b2b2;*/
-/*    padding: 0 10px;*/
-/*    vertical-align: top;*/
-/*}*/
-
-/*button {*/
-/*    color: #fff;*/
-/*    background-color: #29c5e6;*/
-/*    border: none;*/
-/*    height: 32px;*/
-/*    width: 400px;*/
-/*    font-family: 'Oswald', sans-serif;*/
-/*}*/
-
-/*.form-outline mb-4 {*/
-
-/*}*/
+.*
