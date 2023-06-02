@@ -16,7 +16,7 @@ class GaleryGenerateImage(LoginRequiredMixin, TemplateView):
     template_name = "galery/generate_picture.html"
 
     def get_success_url(self):
-        return reverse('user_image')
+        return reverse('generate_image')
 
     def form_valid(self, form):
         generate_image.delay(

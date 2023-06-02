@@ -1,17 +1,19 @@
 import base64
+import os
 from urllib.parse import urljoin
 
 import requests
 from django.core.files.base import ContentFile
+from rest_framework.status import HTTP_200_OK
 
 
 class GenerateImageHandler:
     """ Обработчик сгенерированных изображений"""
 
     class Endpoint:
-        INITIATE = "/initiate_processing"
-        CHECK_STATUS = "/check_status"
-        GET_RESULTS = "/get_results"
+        INITIATE = os.getenv("INITIATE")
+        CHECK_STATUS = os.getenv("CHECK_STATUS")
+        GET_RESULTS = os.getenv("GET_RESULTS")
 
     def __init__(
             self,
@@ -57,7 +59,7 @@ class GenerateImageHandler:
         }
         url = urljoin(self.host, self.Endpoint.INITIATE)
         response = requests.post(url, json=params)
-        if response.status_code == 200:
+        if response.status_code == HTTP_200_OK:
             return response.text
         else:
             raise ValueError(

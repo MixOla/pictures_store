@@ -7,13 +7,6 @@ from django.views import View
 from .forms import LoginForm, UserRegistrationForm
 
 
-
-
-def logout_user(request):
-    logout(request)
-    return redirect("galery_list")
-
-
 class RegisterUser(View):
     form_class = UserRegistrationForm
     template_name = 'galery/register.html'
@@ -32,8 +25,9 @@ class RegisterUser(View):
             new_user.set_password(form.cleaned_data["password"])
             # Save the User object
             new_user.save()
-            return redirect('login')
+            return redirect('generate_image')
         return render(request, self.template_name, {"user_form": form})
+
 
 
 class LoginUser(View):
@@ -57,8 +51,13 @@ class LoginUser(View):
                     return redirect("galery_list")
                 return HttpResponse("Отключенная учетная запись")
             else:
-                return HttpResponse("Недопустимый логин")
+                return HttpResponse("Неверная пара логин - пароль. Попробуйте еще раз.")
         return render(request, self.template_name, {"form": form})
 
     def get_success_url(self):
         return reverse_lazy('home')
+
+
+def logout_user(request):
+    logout(request)
+    return redirect("galery_list")
