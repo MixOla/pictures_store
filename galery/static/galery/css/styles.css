@@ -104,4 +104,11 @@ ul.mainmenu li a:hover {
     text-align: center;
 }
 
-.*
+input.text {
+    width:  400px;
+    height: 100px;
+    padding: 5px 10px 5px 10px;
+    border:1px solid #999;
+    font-size:16px;
+
+}
