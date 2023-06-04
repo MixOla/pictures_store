@@ -10,11 +10,11 @@ from .forms import LoginForm, UserRegistrationForm
 class RegisterUser(View):
     form_class = UserRegistrationForm
     template_name = 'galery/register.html'
-    success_url = reverse_lazy('generate_image')
+    success_url = reverse_lazy('generate_picture')
 
     def get(self, request):
         form = self.form_class()
-        return render(request, self.template_name, {"user_form": form})
+        return render(request, self.template_name, {"form": form})
 
     def post(self, request):
         form = self.form_class(request.POST)
@@ -26,13 +26,14 @@ class RegisterUser(View):
             # Save the User object
             new_user.save()
             return redirect('generate_image')
-        return render(request, self.template_name, {"user_form": form})
+        return render(request, self.template_name, {"form": form})
 
 
 
 class LoginUser(View):
     form_class = LoginForm
     template_name = 'galery/login.html'
+    success_url = reverse_lazy('home')
 
     def get(self, request):
         form = self.form_class()
@@ -53,9 +54,6 @@ class LoginUser(View):
             else:
                 return HttpResponse("Неверная пара логин - пароль. Попробуйте еще раз.")
         return render(request, self.template_name, {"form": form})
-
-    def get_success_url(self):
-        return reverse_lazy('home')
 
 
 def logout_user(request):

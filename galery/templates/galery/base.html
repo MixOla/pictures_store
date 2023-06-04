@@ -26,17 +26,18 @@
 
         <div class="content">
 
-            <p align="center"><b>Создай изображение по своему описанию</b></p>
+{#            <p align="center"><b>Создай изображение по своему описанию</b></p>#}
             {% block mainmenu %}
                     <div class="panel">
                         <ul>
+{#                        <ul id="mainmenu" class="mainmenu>#}
                             {% if not user.is_authenticated %}
                                 <li class="last"><a href="{% url 'register' %}">Регистрация</a></li>
                                 <li class="last"><a href="{% url 'login' %}">Войти</a></li>
                             {% else %}
                                 <li class="last"> {{ user.username }} | <a href="{% url 'logout' %}">Выйти</a></li>
                             {% endif %}
-                            <li class="last"><a href="{% url 'generate_image' %}">Создать изображение</a></li>
+                            <li class="last"><a href="{% url 'generate_picture' %}">Создать изображение</a></li>
                         </ul>
                         <div class="clear"></div>
                     </div>
