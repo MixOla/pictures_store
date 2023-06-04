@@ -39,7 +39,7 @@ display:inline-block;
 .logo {
 width:1800px;
 height:100px;
-background:#1b6d85 url('../images/logo.png') no-repeat center;;
+background:#1b6d85 url('../images/logo.png') no-repeat center;
 }
 
 
@@ -55,31 +55,31 @@ background:#1b6d85 url('../images/logo.png') no-repeat center;;
     font-size: 18px;
 }
 
-.ul.panel {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	height: 60px;
-	color: #fdc073;
-	font-size: 200px;
-	overflow: hidden;
-}
+/*.ul.panel {*/
+/*	list-style: none;*/
+/*	margin: 0;*/
+/*	padding: 0;*/
+/*	height: 60px;*/
+/*	color: #fdc073;*/
+/*	font-size: 200px;*/
+/*	overflow: hidden;*/
+/*}*/
 
-ul.panel li {
-	float: left;
-	margin: 18px 40px 0 30px;
-}
+/*ul.panel li {*/
+/*	float: left;*/
+/*	margin: 18px 40px 0 30px;*/
+/*}*/
 
-ul.panel li.last {float: right;}
+/*ul.panel li.last {float: right;}*/
 
-.panel.ul li a {
-	color: #fdc073;
-	text-decoration: none;
-}
+/*.panel.ul li a {*/
+/*	color: #fdc073;*/
+/*	text-decoration: none;*/
+/*}*/
 
-ul.mainmenu li a:hover {
-	color: #FDA83D;
-}
+/*ul.mainmenu li a:hover {*/
+/*	color: #FDA83D;*/
+/*}*/
 
 .content-text {
     max-width: 800px;
@@ -88,6 +88,12 @@ ul.mainmenu li a:hover {
 }
 
 .login {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.register {
     max-width: 400px;
     margin-left: auto;
     margin-right: auto;
