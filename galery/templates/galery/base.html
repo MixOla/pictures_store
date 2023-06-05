@@ -24,24 +24,17 @@
         </a>
 
         <div class="content">
-
-{#            <p align="center"><b>Создай изображение по своему описанию</b></p>#}
-            {% block mainmenu %}
+                    {% block mainmenu %}
                     <div class="panel">
-                        <ul>
-{#                        <ul id="mainmenu" class="mainmenu>#}
                             {% if not user.is_authenticated %}
-                                <li class="last"><a href="{% url 'register' %}">Регистрация</a></li>
-                                <li class="last"><a href="{% url 'login' %}">Войти</a></li>
+                                <a href="{% url 'register' %}">Регистрация</a> | <a href="{% url 'login' %}">Войти</a> |
                             {% else %}
-                                <li class="last"> {{ user.username }} | <a href="{% url 'logout' %}">Выйти</a></li>
+                                {{ user.username }} | <a href="{% url 'logout' %}">Выйти</a> |
                             {% endif %}
-                            <li class="last"><a href="{% url 'generate_picture' %}">Создать изображение</a></li>
-                        </ul>
+                            <a href="{% url 'generate_picture' %}">Создать изображение</a>
                         <div class="clear"></div>
                     </div>
             {% endblock mainmenu %}
-
                 <div class="content-text">
                     {% block content %}
                     {% endblock %}

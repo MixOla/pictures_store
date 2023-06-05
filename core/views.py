@@ -29,7 +29,6 @@ class RegisterUser(View):
         return render(request, self.template_name, {"form": form})
 
 
-
 class LoginUser(View):
     form_class = LoginForm
     template_name = 'galery/login.html'
