@@ -10,7 +10,7 @@ from .forms import LoginForm, UserRegistrationForm
 class RegisterUser(View):
     form_class = UserRegistrationForm
     template_name = 'galery/register.html'
-    success_url = reverse_lazy('generate_picture')
+    success_url = reverse_lazy('register')
 
     def get(self, request):
         form = self.form_class()
@@ -25,7 +25,7 @@ class RegisterUser(View):
             new_user.set_password(form.cleaned_data["password"])
             # Save the User object
             new_user.save()
-            return redirect('generate_image')
+            return redirect('generate_picture')
         return render(request, self.template_name, {"form": form})
 
 

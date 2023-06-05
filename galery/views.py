@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import TemplateView
 
@@ -16,6 +16,12 @@ class GaleryGenerateImage(LoginRequiredMixin, TemplateView):
     form_class = NewImageForm
     template_name = "galery/generate_picture.html"
     success_url = reverse_lazy('generate_picture')
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            return redirect('generate_picture')
+        return render(request, self.template_name, {"form": form})
 
 
     def form_valid(self, form):
