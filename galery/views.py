@@ -17,13 +17,6 @@ class GaleryGenerateImage(LoginRequiredMixin, TemplateView):
     template_name = "galery/generate_picture.html"
     success_url = reverse_lazy('generate_picture')
 
-    # def post(self, request):
-    #     form = self.form_class(request.POST)
-    #     return render(request, self.template_name, {"form": form})
-
-    # def get(self, request):
-    #     form = self.form_class
-    #     return render(request, self.template_name, {"form": form})
 
     def form_valid(self, form):
         generate_image.delay(
