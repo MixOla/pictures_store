@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 
 from galery.forms import NewImageForm
 from galery.models import Galery
@@ -31,11 +31,13 @@ class GaleryGenerateImage(LoginRequiredMixin, TemplateView):
         return super().form_valid(form)
 
 
-class UserGaleryImageView(TemplateView):
+class UserGaleryImageView(ListView):
+    model = Galery
     template_name = "galery/user_page.html"
+    success_url = reverse_lazy('user-image')
 
     def get_context_data(self, **kwargs):
         queryset = Galery.objects.filter(user=self.request.user)
         return {
-            'images': queryset
+            'img': queryset
         }
