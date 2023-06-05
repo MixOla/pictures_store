@@ -41,14 +41,18 @@ html, body {
     color: #e1e1e8;
 }
 
-.a.panel {
+.panel a {
+    padding-right: 10px;
     text-decoration: none;
     color: #e1e1e8;
+    vertical-align: middle;
+    font-size: 20px;
+    vert-align: middle;
 }
 
-.a.panel:hover {
-    text-decoration: none;
-}
+/*.a.panel:hover {*/
+/*    text-decoration: none;*/
+/*}*/
 
 .content-text {
     max-width: 1100px;
