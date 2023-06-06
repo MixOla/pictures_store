@@ -6,11 +6,11 @@
     <p>Напиши запрос для изображения:</p>
     <form method="post">
 
-        <label>
-            <input type="text" class="text">
-        </label>
+{#        <label>#}
+{#            <input type="text" class="text">#}
+{#        </label>#}
 
-        {{ form.as_p }}
+        {{ form }}
         {% csrf_token %}
 
         <p><input type="submit" value="Создать изображение"></p>
